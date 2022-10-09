@@ -5,12 +5,15 @@ print("Bạn đã nhập list: ")
 print(l)
 print("Độ dài list: ", len(l))
 
+sum = 0
 max = min = l[0]
 for i in l:
+    sum += i
     if (i > max):
         max = i
     if (i < min):
         min = i
+print("sum = ", sum)
 print("max = ", max)
 print("min = ", min)
 
