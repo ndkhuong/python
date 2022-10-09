@@ -1,5 +1,5 @@
 l = []
-for i in range(3):
+for i in range(10):
     l.append(int(input("Nhập phần tử thứ {} của list: ".format(i + 1))))
 print("Bạn đã nhập list: ")
 print(l)
