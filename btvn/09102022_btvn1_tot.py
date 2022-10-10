@@ -25,7 +25,7 @@ print("vị trí của vua: ", vua)
 print("vị trí của tốt: ", tot)
 
 while (tot[0] != vua[0] or tot[1] != vua[1]):
-    di_chuyen(tot)
+    tot = di_chuyen(tot)
 print("Bạn đã đến đích")
 
 
