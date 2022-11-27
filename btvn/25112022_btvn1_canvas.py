@@ -22,6 +22,6 @@ s1.create_rectangle()
 s1.create_arc()
 s1.create_polygon()
 s1.create_line()
-mater.geometry('800x300')
+mater.geometry('500x300')
 mainloop()
 
