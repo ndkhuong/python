@@ -1,0 +1,7 @@
+fullname:qwer
+email:132@qw
+phone:123123
+gender:2
+country:Thanland
+password:1
+repassword:1
