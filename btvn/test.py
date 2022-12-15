@@ -1,20 +1,3 @@
-import tkinter as tk
-
-root = tk.Tk()
-
-margin = 0.23
-
-entry = tk.Entry(root)
-
-entry.pack()
-
-def profit_calculator():
-    t = entry.get()
-    print(t)
-    profit = margin * int(entry.get())
-    print(profit)
-
-button_calc = tk.Button(root, text="Calculate", command=profit_calculator)
-button_calc.pack()
-
-root.mainloop()
+with open('sss.txt', 'w', encoding="utf-8") as file:
+            file.write('12312312')
+            file.close()
