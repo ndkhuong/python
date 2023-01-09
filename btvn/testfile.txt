@@ -1,7 +1,0 @@
-fullname:1231
-email:132
-phone:132132
-gender:1
-country:Việt Nam
-password:1
-repassword:1

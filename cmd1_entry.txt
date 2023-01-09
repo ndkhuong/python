@@ -1,1 +1,0 @@
-{"cmd_index": 1, "text": "hello 1"}
