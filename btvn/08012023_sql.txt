@@ -1,0 +1,13 @@
+#create database
+CREATE DATABASE Homework;
+
+#create table
+CREATE TABLE staff_info (
+	STT INT, 
+	Staff_name VARCHAR(25),
+       	Staff_ID NVARCHAR(50), 
+	sallary FLOAT
+);
+
+#alter add column Status
+ALTER TABLE staff_info ADD Status NVARCHAR(25) AFTER sallary
