@@ -1,0 +1,2 @@
+1. form đăng ký
+2. thêm sửa xóa
