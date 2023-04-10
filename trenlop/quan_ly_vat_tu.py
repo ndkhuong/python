@@ -194,7 +194,6 @@ class quan_ly_vat_tu():
             self.get_list_product()
     
     def get_add_form(self):
-        global ngay_bat_dau_var
         add_form = Frame(self.root)
         add_form.grid(row=0, column=0, padx=10, pady=5, sticky='wn')
         
