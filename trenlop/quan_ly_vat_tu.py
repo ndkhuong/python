@@ -817,7 +817,7 @@ class quan_ly_vat_tu():
 
 #####################################################################
 window_width = 650
-window_height = 600
+window_height = 550
 
 root = Tk()  # create root window
 root.title("QUẢN LÝ VẬT TƯ")
