@@ -10,5 +10,5 @@ cn_str = ("Driver={ODBC Driver 17 for SQL Server};"
     )
 c = pyodbc.connect(cn_str)
 c.cursor()
-for row in c.execute("select STT,HV, _SDT, TRANGTHAI  from hocvien"):
+for row in c.execute("select STT,HV, _SDT, TRANGTHAI  from hocvien WHERE HV = N'Hồ Minh Thiệu'"):
     print(row)
