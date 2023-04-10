@@ -27,7 +27,6 @@ class quan_ly_vat_tu():
         self.hop_dong_var = StringVar(master=self.root)
         self.dia_phuong_var = StringVar(master=self.root)
 
-
     def conn_db(self):
         conn = sqlite3.connect("quan_ly_vat_tu.db") 
         return conn
@@ -103,38 +102,41 @@ class quan_ly_vat_tu():
         self.exe_query(sql)
 
     def insert_product(self):
-        sql = '''INSERT INTO vat_tu (msp, serial, model, nsx, ngay_mua, gia, hop_dong, dia_phuong) VALUES
-        ('MRFU 900', '2102310KBU10E2000438', 'BTS/ Node B', 'HUAWEI', '23/08/2022', '36966000', 'HĐ01', 'Đài viễn thông Nghệ An'),
-        ('MRFU 900', '2102310KBU10E2000451', 'BTS/ Node B', 'HUAWEI', '23/08/2022', '15403000', 'HĐ02', 'Đài viễn thông Nghệ An'),
-        ('MRFU 900', '2102310KBU10E2000637', 'BTS/ Node B', 'HUAWEI', '23/08/2022', '47070000', 'HĐ03', 'Đài viễn thông Nghệ An'),
-        ('MRFU 900', '2102310KBU10D1002004', 'BTS/ Node B', 'HUAWEI', '23/08/2022', '33623000', 'HĐ04', 'Đài viễn thông Nghệ An'),
-        ('MRFU 900', '2102310KBU10D2001045', 'BTS/ Node B', 'HUAWEI', '23/08/2022', '33656000', 'HĐ05', 'Đài viễn thông Nghệ An'),
-        ('WRFU 2100', '21023192314MAB007867', 'BTS/ Node B', 'HUAWEI', '22/08/2022', '61817000', 'HĐ06', 'Đài viễn thông Vĩnh Phúc'),
-        ('MRFU 900B', '2102310KBU10E2000564', 'BTS/ Node B', 'HUAWEI', '07/09/2022', '24701000', 'HĐ07', 'Đài viễn thông Hà Nội 2'),
-        ('MRFU 1800', '2102310KBH10E4000770', 'BTS/ Node B', 'HUAWEI', '23/08/2022', '34419000', 'HĐ08', 'Đài viễn thông Nghệ An'),
-        ('FXED', 'S1M201102929', 'BTS/ Node B', 'NOKIA', '22/08/2022', '63243000', 'HĐ09', 'Đài viễn thông Vĩnh Phúc'),
-        ('R4850G', '2102312QTDLULC002714', 'Nguồn', 'HUAWEI', '23/08/2022', '81259000', 'HĐ10', 'Đài viễn thông Nghệ An'),
-        ('Router Cisco ASR901', 'CAT2313U4G1', 'Truyền Dẫn', 'Cisco', '23/08/2022', '99061000', 'HĐ11', 'Đài viễn thông Nghệ An'),
-        ('Router Cisco ASR901', 'CAT2313U1E9', 'Truyền Dẫn', 'Cisco', '23/08/2022', '62394000', 'HĐ12', 'Đài viễn thông Nghệ An'),
-        ('Router Cisco ASR 920', 'FOC2502NK4Q', 'Truyền Dẫn', 'CISCO', '23/08/2022', '72910000', 'HĐ13', 'Đài viễn thông Nghệ An'),
-        ('Router Cisco ASR901', 'CAT2304U13S', 'Truyền Dẫn', 'Cisco', '23/08/2022', '91907000', 'HĐ14', 'Đài viễn thông Nghệ An'),
-        ('Router Cisco ASR 920', 'FOC2505NRN4', 'Truyền Dẫn', 'CISCO', '23/08/2022', '16497000', 'HĐ15', 'Đài viễn thông Nghệ An'),
-        ('MRFU 900B', '2102310KBU10DA001230', 'BTS/ Node B', 'HUAWEI', '07/09/2022', '26703000', 'HĐ16', 'Đài viễn thông Hà Nội 2'),
-        ('WRFU 2100', '21023192314MAB005934', 'BTS/ Node B', 'HUAWEI', '19/09/2022', '29771000', 'HĐ17', 'Đài viễn thông Vĩnh Phúc'),
-        ('FXED', 'S1M170335362', 'BTS/ Node B', 'NOKIA', '07/09/2022', '29548000', 'HĐ18', 'Đài viễn thông Hà Nội 2'),
-        ('FXED', 'S1M180907283', 'BTS/ Node B', 'NOKIA', '07/09/2022', '46674000', 'HĐ19', 'Đài viễn thông Hà Nội 2'),
-        ('FXED', 'S1M180907037', 'BTS/ Node B', 'NOKIA', '07/09/2022', '1391000', 'HĐ20', 'Đài viễn thông Hà Nội 2'),
-        ('FXED', 'S1M170808871', 'BTS/ Node B', 'NOKIA', '07/09/2022', '89496000', 'HĐ21', 'Đài viễn thông Hà Nội 1'),
-        ('IDU VR4', '11111', 'Pasolink', 'NEC', '19/09/2022', '83760000', 'HĐ22', 'Đài viễn thông Hải Phòng'),
-        ('WMPT', '020JQE6TB8601301', 'BTS/ Node B', 'HUAWEI', '19/09/2022', '33425000', 'HĐ23', 'Đài viễn thông Hải Phòng'),
-        ('WMPT', '020JQE4M99170094', 'BTS/ Node B', 'HUAWEI', '19/09/2022', '50741000', 'HĐ24', 'Đài viễn thông Vĩnh Phúc'),
-        ('ALCplus2e IDU', '1414273400100701D', 'Truyền Dẫn', 'Siae Microelettronica', '23/08/2022', '99756000', 'HĐ25', 'Đài viễn thông Nghệ An'),
-        ('ALCplus2e IDU', '10165528900151D', 'Truyền Dẫn', 'Siae Microelettronica', '22/08/2022', '58378000', 'HĐ26', 'Đài viễn thông Vĩnh Phúc'),
-        ('ASNK15', '10161852700020C', 'Truyền Dẫn', 'Siae Microelettronica', '08/08/2022', '46332000', 'HĐ27', 'Đài viễn thông Thái Nguyên'),
-        ('ASN15', '01422325001320', 'Truyền Dẫn', 'Siae Microelettronica', '02/06/2022', '84149000', 'HĐ28', 'Đài viễn thông Vĩnh Phúc'),
-        ('ACX1000', 'HT0219260357', 'Truyền Dẫn', 'JUNIPER', '08/08/2022', '32658000', 'HĐ29', 'Đài viễn thông Thái Nguyên'),
-        ('ACX2100-DC', 'NK0216270362', 'Truyền Dẫn', 'JUNIPER', '07/09/2022', '78771000', 'HĐ30', 'Đài viễn thông Hà Nội 1')'''
-        self.exe_query(sql)
+        sql = "SELECT msp FROM vat_tu LIMIT 1"
+        rows = self.query(sql)
+        if not rows:
+            sql = '''INSERT INTO vat_tu (msp, serial, model, nsx, ngay_mua, gia, hop_dong, dia_phuong) VALUES
+            ('MRFU 900', '2102310KBU10E2000438', 'BTS/ Node B', 'HUAWEI', '23/08/2022', '36966000', 'HĐ01', 'Đài viễn thông Nghệ An'),
+            ('MRFU 900', '2102310KBU10E2000451', 'BTS/ Node B', 'HUAWEI', '23/08/2022', '15403000', 'HĐ02', 'Đài viễn thông Nghệ An'),
+            ('MRFU 900', '2102310KBU10E2000637', 'BTS/ Node B', 'HUAWEI', '23/08/2022', '47070000', 'HĐ03', 'Đài viễn thông Nghệ An'),
+            ('MRFU 900', '2102310KBU10D1002004', 'BTS/ Node B', 'HUAWEI', '23/08/2022', '33623000', 'HĐ04', 'Đài viễn thông Nghệ An'),
+            ('MRFU 900', '2102310KBU10D2001045', 'BTS/ Node B', 'HUAWEI', '23/08/2022', '33656000', 'HĐ05', 'Đài viễn thông Nghệ An'),
+            ('WRFU 2100', '21023192314MAB007867', 'BTS/ Node B', 'HUAWEI', '22/08/2022', '61817000', 'HĐ06', 'Đài viễn thông Vĩnh Phúc'),
+            ('MRFU 900B', '2102310KBU10E2000564', 'BTS/ Node B', 'HUAWEI', '07/09/2022', '24701000', 'HĐ07', 'Đài viễn thông Hà Nội 2'),
+            ('MRFU 1800', '2102310KBH10E4000770', 'BTS/ Node B', 'HUAWEI', '23/08/2022', '34419000', 'HĐ08', 'Đài viễn thông Nghệ An'),
+            ('FXED', 'S1M201102929', 'BTS/ Node B', 'NOKIA', '22/08/2022', '63243000', 'HĐ09', 'Đài viễn thông Vĩnh Phúc'),
+            ('R4850G', '2102312QTDLULC002714', 'Nguồn', 'HUAWEI', '23/08/2022', '81259000', 'HĐ10', 'Đài viễn thông Nghệ An'),
+            ('Router Cisco ASR901', 'CAT2313U4G1', 'Truyền Dẫn', 'Cisco', '23/08/2022', '99061000', 'HĐ11', 'Đài viễn thông Nghệ An'),
+            ('Router Cisco ASR901', 'CAT2313U1E9', 'Truyền Dẫn', 'Cisco', '23/08/2022', '62394000', 'HĐ12', 'Đài viễn thông Nghệ An'),
+            ('Router Cisco ASR 920', 'FOC2502NK4Q', 'Truyền Dẫn', 'CISCO', '23/08/2022', '72910000', 'HĐ13', 'Đài viễn thông Nghệ An'),
+            ('Router Cisco ASR901', 'CAT2304U13S', 'Truyền Dẫn', 'Cisco', '23/08/2022', '91907000', 'HĐ14', 'Đài viễn thông Nghệ An'),
+            ('Router Cisco ASR 920', 'FOC2505NRN4', 'Truyền Dẫn', 'CISCO', '23/08/2022', '16497000', 'HĐ15', 'Đài viễn thông Nghệ An'),
+            ('MRFU 900B', '2102310KBU10DA001230', 'BTS/ Node B', 'HUAWEI', '07/09/2022', '26703000', 'HĐ16', 'Đài viễn thông Hà Nội 2'),
+            ('WRFU 2100', '21023192314MAB005934', 'BTS/ Node B', 'HUAWEI', '19/09/2022', '29771000', 'HĐ17', 'Đài viễn thông Vĩnh Phúc'),
+            ('FXED', 'S1M170335362', 'BTS/ Node B', 'NOKIA', '07/09/2022', '29548000', 'HĐ18', 'Đài viễn thông Hà Nội 2'),
+            ('FXED', 'S1M180907283', 'BTS/ Node B', 'NOKIA', '07/09/2022', '46674000', 'HĐ19', 'Đài viễn thông Hà Nội 2'),
+            ('FXED', 'S1M180907037', 'BTS/ Node B', 'NOKIA', '07/09/2022', '1391000', 'HĐ20', 'Đài viễn thông Hà Nội 2'),
+            ('FXED', 'S1M170808871', 'BTS/ Node B', 'NOKIA', '07/09/2022', '89496000', 'HĐ21', 'Đài viễn thông Hà Nội 1'),
+            ('IDU VR4', '11111', 'Pasolink', 'NEC', '19/09/2022', '83760000', 'HĐ22', 'Đài viễn thông Hải Phòng'),
+            ('WMPT', '020JQE6TB8601301', 'BTS/ Node B', 'HUAWEI', '19/09/2022', '33425000', 'HĐ23', 'Đài viễn thông Hải Phòng'),
+            ('WMPT', '020JQE4M99170094', 'BTS/ Node B', 'HUAWEI', '19/09/2022', '50741000', 'HĐ24', 'Đài viễn thông Vĩnh Phúc'),
+            ('ALCplus2e IDU', '1414273400100701D', 'Truyền Dẫn', 'Siae Microelettronica', '23/08/2022', '99756000', 'HĐ25', 'Đài viễn thông Nghệ An'),
+            ('ALCplus2e IDU', '10165528900151D', 'Truyền Dẫn', 'Siae Microelettronica', '22/08/2022', '58378000', 'HĐ26', 'Đài viễn thông Vĩnh Phúc'),
+            ('ASNK15', '10161852700020C', 'Truyền Dẫn', 'Siae Microelettronica', '08/08/2022', '46332000', 'HĐ27', 'Đài viễn thông Thái Nguyên'),
+            ('ASN15', '01422325001320', 'Truyền Dẫn', 'Siae Microelettronica', '02/06/2022', '84149000', 'HĐ28', 'Đài viễn thông Vĩnh Phúc'),
+            ('ACX1000', 'HT0219260357', 'Truyền Dẫn', 'JUNIPER', '08/08/2022', '32658000', 'HĐ29', 'Đài viễn thông Thái Nguyên'),
+            ('ACX2100-DC', 'NK0216270362', 'Truyền Dẫn', 'JUNIPER', '07/09/2022', '78771000', 'HĐ30', 'Đài viễn thông Hà Nội 1')'''
+            self.exe_query(sql)
 
     def insert_master_admin(self):
         sql = "SELECT username FROM admin WHERE username = 'root' LIMIT 1"
@@ -184,7 +186,6 @@ class quan_ly_vat_tu():
             return
         else:
             self.permission = rows[0]
-            print(self.permission)
             self.login_form.destroy()
             self.get_add_form()
             self.get_list_product()
@@ -706,10 +707,11 @@ class quan_ly_vat_tu():
         Label(add_form, text="Model").grid(row=ROW, column=0, padx=5, pady=5, sticky=W)
         Entry(add_form, textvariable=self.update_model_var).grid(row=ROW, column=1, padx=5, pady=5)
         
-        self.update_nsx_var = StringVar(master=self.popup, value=data["nsx"])
+        self.update_nsx_var = StringVar(master=self.popup)
         Label(add_form, text="Nhà sản xuất").grid(row=ROW, column=2, padx=5, pady=5, sticky=W)
         list_opt = self.get_list_nsx()
         field = ttk.OptionMenu(add_form, self.update_nsx_var, *list_opt)
+        self.update_nsx_var.set(data["nsx"])
         field.config(width=15)
         field.grid(row=ROW, column=3, padx=5, pady=5)
         
@@ -835,9 +837,9 @@ root.geometry('%dx%d+%d+%d' % (window_width, window_height, x, y))
 
 ql = quan_ly_vat_tu(root, window_width, window_height)
 ql.create_table()
-ql.get_login_form()
+#ql.get_login_form()
 #ql.show_admin_form()
-#ql.get_add_form()
-#ql.get_list_product()
+ql.get_add_form()
+ql.get_list_product()
 
 root.mainloop()
