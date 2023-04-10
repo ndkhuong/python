@@ -209,6 +209,7 @@ class quan_ly_vat_tu():
         Label(add_form, text="Nhà sản xuất").grid(row=ROW, column=2, padx=5, pady=5, sticky=W)
         list_opt = self.get_list_nsx()
         field = ttk.OptionMenu(add_form, self.nsx_var, *list_opt)
+        self.nsx_var.set('')
         field.config(width=15)
         field.grid(row=ROW, column=3, padx=5, pady=5, sticky=W)
 
@@ -286,7 +287,6 @@ class quan_ly_vat_tu():
                     continue
                 row = row.rstrip('\n')
                 row = row.split(";")
-                print(row)
                 sql = ''' INSERT INTO vat_tu (msp, serial, model, nsx, ngay_mua, gia, hop_dong, dia_phuong)
                 VALUES(?,?,?,?,?,?,?,?) '''
                 data = [row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]]
@@ -380,7 +380,6 @@ class quan_ly_vat_tu():
         stt = 0
         for row in rows:
             stt += 1
-            #print(row) # it print all records in the database
             data = (
                 stt,
                 row["username"]
@@ -453,7 +452,6 @@ class quan_ly_vat_tu():
         self.exe_query(sql, [val, username])
             
     def delete_admin(self, username):
-        print(username)
         sql = "DELETE FROM admin WHERE username = ?"
         self.exe_query(sql, [username,])
         self.get_list_admin()
@@ -541,6 +539,8 @@ class quan_ly_vat_tu():
         if (conds != ""):
             sql += " WHERE " + conds.lstrip(" AND")
         rows = self.query(sql, data_bind)
+        print(sql)
+        print(search)
 
         for row in rows:
             data = (
@@ -656,10 +656,13 @@ class quan_ly_vat_tu():
         return self.get_list_product(search)
 
     def item_selected(self, event): 
+        id = 0
         for selected_item in self.tree.selection():
             item = self.tree.item(selected_item)
             id = item['values'][0]
-        self.show_update_form(id)
+            break
+        if id > 0:
+            self.show_update_form(id)
 
     def show_update_form(self, id):
         self.popup_width = 500
