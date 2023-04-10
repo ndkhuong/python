@@ -93,13 +93,16 @@ class quan_ly_vat_tu():
         self.insert_admin('khuong10', '123')
 
     def insert_nsx(self):
-        sql = '''INSERT INTO nha_san_xuat (nsx_ten) VALUES 
-        ('HUAWEI'), ('NOKIA'), ('Cisco'), ('NEC'), ('Siae Microelettronica'), ('JUNIPER'), ('ALCATEL'), ('DELTA'), 
-        ('AGISSON'), ('EMERSON'), ('AEG'), ('ERICSSON'), ('ELTEK'), ('3Y Power Technology'), ('Fiber Home'), ('Grentech'), 
-        ('SEAGATE'), ('BENNING'), ('Cherokee'), ('SAFT'), ('Sunnada'), ('ALU'), ('TỰ MUA SẮM'), ('ZTE'), ('HW'), ('ERA'), 
-        ('HP'), ('CIENA'), ('HGST'), ('SOLID'), ('CERAGON'), ('FUJITSU'), ('SAMSUNG'), ('Tekelec'), ('VERTIV'), ('EATON'), 
-        ('RAISECOM'), ('TOSHIBA'), ('Dynamic Power'), ('Rosenberger'), ('Super Stack'), ('Khác')'''
-        self.exe_query(sql)
+        sql = "SELECT nsx_ten FROM nha_san_xuat LIMIT 1"
+        rows = self.query(sql)
+        if not rows:
+            sql = '''INSERT INTO nha_san_xuat (nsx_ten) VALUES 
+            ('HUAWEI'), ('NOKIA'), ('Cisco'), ('NEC'), ('Siae Microelettronica'), ('JUNIPER'), ('ALCATEL'), ('DELTA'), 
+            ('AGISSON'), ('EMERSON'), ('AEG'), ('ERICSSON'), ('ELTEK'), ('3Y Power Technology'), ('Fiber Home'), ('Grentech'), 
+            ('SEAGATE'), ('BENNING'), ('Cherokee'), ('SAFT'), ('Sunnada'), ('ALU'), ('TỰ MUA SẮM'), ('ZTE'), ('HW'), ('ERA'), 
+            ('HP'), ('CIENA'), ('HGST'), ('SOLID'), ('CERAGON'), ('FUJITSU'), ('SAMSUNG'), ('Tekelec'), ('VERTIV'), ('EATON'), 
+            ('RAISECOM'), ('TOSHIBA'), ('Dynamic Power'), ('Rosenberger'), ('Super Stack'), ('Khác')'''
+            self.exe_query(sql)
 
     def insert_product(self):
         sql = "SELECT msp FROM vat_tu LIMIT 1"
