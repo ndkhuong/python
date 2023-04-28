@@ -252,7 +252,7 @@ class quan_ly_vat_tu():
             Button(btn_tool, text="Quản lý Admin", command=lambda: self.show_admin_form()).grid(row=ROW, column=5, padx=5, pady=5, ipadx=10, sticky=W)
 
         ROW = 5
-        btn_chart = Frame(add_form, highlightbackground="grey", highlightthickness=1)
+        btn_chart = Frame(add_form, bd=1, relief="sunken")
         btn_chart.grid(row=ROW, column=0, padx=5, pady=5, columnspan=10, sticky=W)
 
         ROW = 0
