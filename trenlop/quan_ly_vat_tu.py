@@ -880,9 +880,9 @@ root.geometry('%dx%d+%d+%d' % (window_width, window_height, x, y))
 
 ql = quan_ly_vat_tu(root, window_width, window_height)
 ql.create_table()
-#ql.get_login_form()
+ql.get_login_form()
 #ql.show_admin_form()
-ql.get_add_form()
-ql.get_list_product()
+#ql.get_add_form()
+#ql.get_list_product()
 
 root.mainloop()
