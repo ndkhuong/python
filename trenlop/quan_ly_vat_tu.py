@@ -5,6 +5,11 @@ import sqlite3
 from tkcalendar import DateEntry
 from datetime import datetime
 import os
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+sns.set_theme(style="darkgrid")
 
 #exec file: $ pyinstaller --hidden-import babel.numbers filename.py
 
@@ -14,7 +19,7 @@ class quan_ly_vat_tu():
         self.window_width = window_width
         self.window_height = window_height#active scrollbar
         self.root.columnconfigure(0, weight=1)
-        self.root.rowconfigure(0, weight=1)
+        #self.root.rowconfigure(0, weight=1)
         self.permission = {"master": 0, "add": 0, "edit": 0, "delete": 0, "export": 0, "import": 0}
         self.username_var = StringVar(master=self.root)
         self.password_var = StringVar(master=self.root)
@@ -168,7 +173,7 @@ class quan_ly_vat_tu():
         
         ROW = 1
         Label(self.login_form, text="Password").grid(row=ROW, column=0, padx=5, pady=5, sticky=W)
-        Entry(self.login_form, textvariable=self.password_var).grid(row=ROW, column=1, padx=5, pady=5)
+        Entry(self.login_form, textvariable=self.password_var, show="*").grid(row=ROW, column=1, padx=5, pady=5)
 
         ROW = 2
         Button(self.login_form, text="Đăng nhập", command=lambda: self.check_login()).grid(row=ROW, column=1, padx=5, pady=5, ipadx=10, sticky=E)
@@ -245,7 +250,40 @@ class quan_ly_vat_tu():
             Button(btn_tool, text="Import CSV ", command=lambda: self.import_product()).grid(row=ROW, column=4, padx=5, pady=5, ipadx=10, sticky=W)
         if self.permission["master"] == 1:
             Button(btn_tool, text="Quản lý Admin", command=lambda: self.show_admin_form()).grid(row=ROW, column=5, padx=5, pady=5, ipadx=10, sticky=W)
-    
+
+        ROW = 5
+        btn_chart = Frame(add_form, highlightbackground="grey", highlightthickness=1)
+        btn_chart.grid(row=ROW, column=0, padx=5, pady=5, columnspan=10, sticky=W)
+
+        ROW = 0
+        Label(btn_chart, text="Xem biểu đồ theo:").grid(row=ROW, column=0, padx=5, pady=5, sticky=W, columnspan=100)
+        
+        ROW = 1
+        Button(btn_chart, text="Mã SP", padx=10, command=lambda: self.display_chart('msp')).grid(row=ROW, column=0, padx=5, pady=5, ipadx=10, sticky=W)
+        Button(btn_chart, text="Model", padx=10, command=lambda: self.display_chart('model')).grid(row=ROW, column=1, padx=5, pady=5, ipadx=10, sticky=W)
+        Button(btn_chart, text="Nhà sản xuất", padx=10, command=lambda: self.display_chart('nsx')).grid(row=ROW, column=2, padx=5, pady=5, ipadx=10, sticky=W)
+        Button(btn_chart, text="Ngày mua", padx=10, command=lambda: self.display_chart('ngay_mua')).grid(row=ROW, column=3, padx=5, pady=5, ipadx=10, sticky=W)
+        Button(btn_chart, text="Địa phương", padx=10, command=lambda: self.display_chart('dia_phuong')).grid(row=ROW, column=4, padx=5, pady=5, ipadx=10, sticky=W)
+
+    def display_chart(self, field) :
+        obj = {
+            "msp": "Mã SP",
+            "model": "Model",
+            "nsx": "Nhà sản xuất",
+            "ngay_mua": "Ngày mua",
+            "dia_phuong": "Địa phương",
+        }
+
+        alias_name = obj[field]
+        query = 'SELECT '+ field +' as `'+ alias_name +'`, COUNT(1) as `Số lượng SP` FROM vat_tu GROUP BY '+ field +' ORDER BY '+ field
+        print(query)
+        rs = pd.read_sql_query (query, self.conn_db())
+        df = pd.DataFrame(rs, columns = [alias_name, 'Số lượng SP'])
+        bar_chart = sns.barplot(data=df, x=alias_name, y="Số lượng SP")
+        #for item in bar_chart.get_xticklabels():
+            #item.set_rotation(30)
+        plt.show()
+
     def get_list_nsx(self):
         sql = "SELECT * FROM nha_san_xuat"
         rows = self.query(sql)
@@ -471,7 +509,7 @@ class quan_ly_vat_tu():
         
         ROW = 1
         list_student_frame = Frame(self.root)
-        list_student_frame.grid(row=1, column=0, padx=10)
+        list_student_frame.grid(row=1, column=0, padx=10, sticky='wn')
 
         #extended = can select multi row
         #browse = can only select single row
@@ -558,7 +596,7 @@ class quan_ly_vat_tu():
             )
             self.tree.insert("", END, values=data)
 
-        self.tree.grid(row=0, column=0, padx=5, pady=5)
+        self.tree.grid(row=0, column=0, padx=5, pady=5, sticky='e')
         
         # add a scrollbar
         scrollbar = ttk.Scrollbar(list_student_frame, orient=VERTICAL, command=self.tree.yview)
@@ -821,10 +859,10 @@ class quan_ly_vat_tu():
         self.popup.destroy()
         self.refresh_list()
 
-
+    
 #####################################################################
-window_width = 650
-window_height = 550
+window_width = 900
+window_height = 630
 
 root = Tk()  # create root window
 root.title("QUẢN LÝ VẬT TƯ")
@@ -842,9 +880,9 @@ root.geometry('%dx%d+%d+%d' % (window_width, window_height, x, y))
 
 ql = quan_ly_vat_tu(root, window_width, window_height)
 ql.create_table()
-ql.get_login_form()
+#ql.get_login_form()
 #ql.show_admin_form()
-#ql.get_add_form()
-#ql.get_list_product()
+ql.get_add_form()
+ql.get_list_product()
 
 root.mainloop()
